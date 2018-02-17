@@ -9,6 +9,8 @@ services:
     volumes:
       - "$PWD/api:/srv/api"
       - ${HOME}/privat/data/pilz_io/img:/data/images
+    ports:
+      - 3001:3001
   postgres:
     image: postgres:10.2-alpine
     volumes:
@@ -25,7 +27,7 @@ services:
   redis:
     image: redis:alpine
   nginx:
-    build: ./nginx
+    image: nginx:alpine
     ports:
       - 80:80
     restart: always

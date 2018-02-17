@@ -16,6 +16,6 @@ export class MushroomService {
   }
 
   async create(mushroom: Mushroom): Promise<Mushroom> {
-    return await this.mushroomRepository.create(mushroom);
+    return await this.mushroomRepository.save(mushroom);
   }
 }
