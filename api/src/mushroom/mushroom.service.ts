@@ -15,6 +15,10 @@ export class MushroomService {
     return await this.mushroomRepository.find();
   }
 
+  async findById(id: string): Promise<Mushroom> {
+    return await this.mushroomRepository.findOneById(id);
+  }
+
   async create(mushroom: Mushroom): Promise<Mushroom> {
     return await this.mushroomRepository.save(mushroom);
   }

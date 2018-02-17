@@ -1,13 +1,30 @@
 import * as React from 'react';
+import { BrowserRouter as Router } from 'react-router-dom';
+import { Layout } from 'antd';
+
+import {
+  Header,
+  MainContent,
+  Sidebar,
+} from './common';
+
 import './App.css';
-import { NewMushroomComponent } from './NewMushroom';
 
 class App extends React.Component {
+
   render() {
     return (
-      <div className="App">
-        <NewMushroomComponent/>
-      </div>
+      <Router>
+        <Layout>
+          <Header/>
+          <Layout>
+            <Sidebar/>
+            <Layout>
+              <MainContent/>
+            </Layout>
+          </Layout>
+        </Layout>
+      </Router>
     );
   }
 }

@@ -8,12 +8,14 @@ import { UploadFile, UploadLocale } from 'antd/lib/upload/interface';
 import { ChangeEvent, FormEvent } from 'react';
 import FormItem from 'antd/lib/form/FormItem';
 
+import { config } from '../config';
+
 interface PropTypes {
 
 }
 
 const uploadProps: UploadProps = {
-    action: 'http://localhost:3001/mushrooms',
+    action: `${config.apiUrl}/mushrooms`,
     name: 'images',
     beforeUpload(file: UploadFile, fileList: UploadFile[]): Promise<void> | boolean {
         return false;
@@ -30,7 +32,7 @@ const uploadListProps: UploadListProps = {
     locale: uploadLocale,
 };
 
-export class NewMushroomComponent extends React.Component<PropTypes, any> {
+export class NewMushroom extends React.Component<PropTypes, any> {
     
     public state = {
         fileList: [],

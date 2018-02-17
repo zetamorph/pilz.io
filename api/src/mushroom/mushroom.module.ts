@@ -3,12 +3,16 @@ import { MushroomController } from './mushroom.controller';
 import { NestModule, MiddlewaresConsumer } from '@nestjs/common/interfaces';
 import { MulterMiddleware } from '../middleware';
 import { MushroomService } from './mushroom.service';
+import { MushroomResolver } from './mushroom.resolver';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Mushroom } from './mushroom.entity';
 
 @Module({
   imports: [TypeOrmModule.forFeature([Mushroom])],
-  components: [MushroomService],
+  components: [
+    MushroomService,
+    MushroomResolver,
+  ],
   controllers: [MushroomController],
 })
 export class MushroomModule implements NestModule {
