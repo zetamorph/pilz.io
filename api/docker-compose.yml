@@ -1,0 +1,26 @@
+version: '2.3'
+services:
+  api:
+    build: .
+    command: "npm run start:watch"
+    depends_on:
+      postgres:
+        condition: service_healthy
+    volumes:
+      - "$PWD:/srv/api"
+      - ${HOME}/privat/data/pilz_io/img:/data/images
+    ports:
+      - 3001:3001
+  postgres:
+    image: postgres:10.2-alpine
+    volumes:
+      - ${HOME}/privat/data/pilz_io/db:/usr/local/var/lib/postgresql
+    environment:
+      - PGDATA=/usr/local/var/lib/postgresql
+      - POSTGRES_USER=pilz_io
+      - POSTGRES_DB=pilz_io
+    logging:
+      driver: none
+    healthcheck:
+      test: ["CMD", "pg_isready"]
+      interval: 1s
