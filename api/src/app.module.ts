@@ -6,12 +6,14 @@ import { MushroomModule } from './mushroom/mushroom.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { GraphQLModule, GraphQLFactory } from '@nestjs/graphql';
 import { graphqlExpress, graphiqlExpress } from 'apollo-server-express';
+import { Usermodule } from './user/user.module';
 
 @Module({
   imports: [
     GraphQLModule,
-    MushroomModule,
     TypeOrmModule.forRoot(),
+    MushroomModule,
+    Usermodule,
   ],
   controllers: [
     AppController,
