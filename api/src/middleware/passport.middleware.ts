@@ -1,4 +1,4 @@
-import {
+/* import {
     Middleware,
     NestMiddleware,
     ExpressMiddleware,
@@ -13,7 +13,7 @@ export class PassportLocalMiddleware implements NestMiddleware {
     constructor(
         private readonly userService: UserService,
     ) {
-        const passport = new PassportMiddleware();
+        const passport = new Passport();
     }
 
     resolve(): ExpressMiddleware {
@@ -21,4 +21,4 @@ export class PassportLocalMiddleware implements NestMiddleware {
 
         };
     }
-}
+} */

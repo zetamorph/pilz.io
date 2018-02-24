@@ -3,7 +3,6 @@ import { MushroomController } from './mushroom.controller';
 import { NestModule, MiddlewaresConsumer } from '@nestjs/common/interfaces';
 import { MulterMiddleware } from '../middleware';
 import { MushroomService } from './mushroom.service';
-import { MushroomResolver } from './mushroom.resolver';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Mushroom } from './mushroom.entity';
 
@@ -11,7 +10,6 @@ import { Mushroom } from './mushroom.entity';
   imports: [TypeOrmModule.forFeature([Mushroom])],
   components: [
     MushroomService,
-    MushroomResolver,
   ],
   controllers: [MushroomController],
 })

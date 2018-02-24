@@ -2,22 +2,22 @@ import { Module } from '@nestjs/common';
 import { NestModule, MiddlewaresConsumer } from '@nestjs/common/interfaces';
 import { TypeOrmModule } from '@nestjs/typeorm';
 
-import { User } from './user.entity';
-import { UserService } from './user.service';
-import { UserController } from './user.controller';
+import { Vote } from './vote.entity';
+import { VoteService } from './vote.service';
+import { VoteController } from './vote.controller';
 
 @Module({
     imports: [
-        TypeOrmModule.forFeature([User]),
+        TypeOrmModule.forFeature([Vote]),
     ],
     components: [
-        UserService,
+        VoteService,
     ],
     controllers: [
-        UserController,
+        VoteController,
     ],
 })
-export class UserModule implements NestModule {
+export class VoteModule implements NestModule {
   configure(consumer: MiddlewaresConsumer) {
 
   }

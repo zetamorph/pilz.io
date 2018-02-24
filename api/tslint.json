@@ -16,11 +16,9 @@
         "member-access": [
             false
         ],
+        "no-shadowed-variable": false,
         "ordered-imports": [
             false
-        ],
-        "max-line-length": [
-            150
         ],
         "member-ordering": [
             false

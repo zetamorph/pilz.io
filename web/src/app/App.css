@@ -1,0 +1,9 @@
+@import '~antd/dist/antd.css';
+
+p {
+  color: black;
+}
+
+.ant-upload-list-item-info > span {
+  height: 100%;
+}

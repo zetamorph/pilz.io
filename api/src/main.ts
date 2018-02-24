@@ -1,9 +1,9 @@
 import { NestFactory } from '@nestjs/core';
-import { ApplicationModule } from './app.module';
+import { ApplicationModule } from './app/app.module';
 
 import * as dotenv from 'dotenv';
 
-// load the env variables
+// load variables from ../.env
 dotenv.config();
 
 async function bootstrap() {
