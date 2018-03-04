@@ -4,7 +4,7 @@ import { Layout } from 'antd';
 
 import {
     NewMushroom,
-    MushroomList,
+    MushroomListWithState as MushroomList,
 } from '../mushroom';
 
 const { Content } = Layout;

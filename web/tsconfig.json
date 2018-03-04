@@ -1,9 +1,10 @@
 {
   "compilerOptions": {
+    "baseUrl": "src",
     "outDir": "build/dist",
     "module": "esnext",
-    "target": "es5",
-    "lib": ["es6", "dom", "esnext"],
+    "target": "es6",
+    "lib": ["es2017", "dom", "esnext"],
     "sourceMap": true,
     "allowJs": true,
     "jsx": "react",
@@ -16,7 +17,8 @@
     "strictNullChecks": true,
     "strictFunctionTypes": true,
     "suppressImplicitAnyIndexErrors": true,
-    "noUnusedLocals": true
+    "noUnusedLocals": true,
+    "skipLibCheck": false
   },
   "exclude": [
     "node_modules",

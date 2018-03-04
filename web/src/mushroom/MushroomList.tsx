@@ -1,41 +1,39 @@
 import * as React from 'react';
-import { config } from '../config';
+import { connect } from 'react-redux';
+import { fetchMushrooms } from '../redux/modules/mushroom';
 
-interface PropTypes {}
+import { Mushroom } from '../types';
 
-type Mushroom = {
-    id: string;
-    proposedName?: string;
-    imageUrls?: string[];
-};
+class MushroomList extends React.Component<any, any> {
 
-export class MushroomList extends React.Component {
-
-    public state = {
-        mushrooms: [],
-    };
-
-    constructor(props: PropTypes) {
+    constructor(props: any) {
         super(props);
     }
 
-    async componentWillMount() {
-        await this.fetchMushrooms();
-    }
-
-    async fetchMushrooms(): Promise<void> {
-        const response = await fetch(`${config.apiUrl}/mushrooms`);
-        const mushrooms = await response.json();
-        console.log(mushrooms);
-        this.setState({ mushrooms });
+    componentDidMount() {
+        this.props.fetchMushrooms();
     }
 
     render() {
         return (
-            this.state.mushrooms.map((mushroom: Mushroom) => {
+            this.props.mushrooms ?
+            this.props.mushrooms.map((mushroom: Mushroom) => {
                 return <p key={mushroom.id}>{mushroom.proposedName}</p>;
             })
+            : <p>keine Pilze</p>
         );
     }
-
 }
+
+const mapStateToProps = state => ({ mushrooms: state.mushrooms });
+
+const mapDispatchToProps = dispatch => {
+    return {
+        fetchMushrooms: () => dispatch(fetchMushrooms()),
+    };
+};
+
+export const MushroomListWithState = connect(
+    mapStateToProps,
+    mapDispatchToProps,
+)(MushroomList);
