@@ -1,10 +1,10 @@
 import { Mushroom } from '../../../types';
+import { actionCreatorFactory } from 'typescript-fsa';
 
-export const FETCH_MUSHROOMS = 'FETCH_MUSHROOMS';
-export const fetchMushrooms = () => ({ type: FETCH_MUSHROOMS });
+const actionCreator = actionCreatorFactory('MUSHROOM');
 
-export const FETCH_MUSHROOMS_DONE = 'FETCH_MUSHROOMS_DONE';
-export const fetchMushroomsDone = (payload: Mushroom[]) => ({ type: FETCH_MUSHROOMS_DONE, payload });
-
-export const FETCH_MUSHROOMS_FAILED = 'FETCH_MUSHROOMS_FAILED';
-export const fetchMushroomsFailed = (payload: Error) => ({ type: FETCH_MUSHROOMS_FAILED, payload });
+export const mushroomActions = {
+    fetchMushrooms: actionCreator.async<undefined, Mushroom[], string>('FETCH_ALL'),
+    createMushroom: actionCreator.async<FormData, undefined, string>('CREATE'),
+    fetchMushroomById: actionCreator<number>('FETCH_BY_ID'),
+};

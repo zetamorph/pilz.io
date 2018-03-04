@@ -1,6 +1,5 @@
 import * as React from 'react';
-
-import { Button, Form, Input } from 'antd';
+import { Form, Input } from 'antd';
 
 const FormItem = Form.Item;
 
@@ -16,7 +15,6 @@ export const NewMushroomForm = Form.create({
                 {getFieldDecorator('proposedName', { rules: [{ required: true }]})
                 (<Input type="text"/>)}
             </FormItem>
-            <Button htmlType="submit">Senden</Button>
         </Form>
     );
 });

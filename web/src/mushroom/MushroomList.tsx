@@ -1,8 +1,11 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
-import { fetchMushrooms } from '../redux/modules/mushroom';
+import { mushroomActions } from '../redux/modules/mushroom';
+import { Link } from 'react-router-dom';
+import { Mushroom } from 'types';
+import { State } from '../types/State';
 
-import { Mushroom } from '../types';
+const { fetchMushrooms } = mushroomActions;
 
 class MushroomList extends React.Component<any, any> {
 
@@ -15,21 +18,22 @@ class MushroomList extends React.Component<any, any> {
     }
 
     render() {
-        return (
-            this.props.mushrooms ?
-            this.props.mushrooms.map((mushroom: Mushroom) => {
-                return <p key={mushroom.id}>{mushroom.proposedName}</p>;
-            })
-            : <p>keine Pilze</p>
-        );
+        return Object.values(this.props.mushrooms as { [id: string]: Mushroom })
+        .map((mushroom) => {
+            return (
+                <Link key={mushroom.id} to={`/mushroom/${mushroom.id}`}>
+                    <p key={mushroom.id}>{mushroom.proposedName}</p>
+                </Link>
+            );
+        });
     }
 }
 
-const mapStateToProps = state => ({ mushrooms: state.mushrooms });
+const mapStateToProps = (state: State) => ({ mushrooms: state.mushrooms });
 
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = (dispatch) => {
     return {
-        fetchMushrooms: () => dispatch(fetchMushrooms()),
+        fetchMushrooms: () => dispatch(fetchMushrooms.started(undefined)),
     };
 };
 

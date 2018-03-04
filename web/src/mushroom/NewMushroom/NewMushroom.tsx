@@ -3,9 +3,14 @@ import * as React from 'react';
 import { UploadFile } from 'antd/lib/upload/interface';
 import { ImageUpload } from './ImageUpload';
 import { NewMushroomForm } from './NewMushroomForm';
+import { mushroomActions } from '../../redux/modules/mushroom/actions';
+import { connect } from 'react-redux';
+import { Button } from 'antd';
+
+const { createMushroom } = mushroomActions;
 
 interface Props {
-
+    createMushroom: (data: any) => any;
 }
 
 interface State {
@@ -20,9 +25,6 @@ export class NewMushroom extends React.Component<Props, State> {
         confirmDirty: true,
         fileList: [],
         formFields: {
-            proposedName: {
-                value: ''
-            },
         },
     };
 
@@ -40,21 +42,18 @@ export class NewMushroom extends React.Component<Props, State> {
 
     handleSubmit(event: React.FormEvent<HTMLFormElement>): void {
         event.preventDefault();
-        console.log('on submit');
         const formData = new FormData();
 
         this.state.fileList.forEach((file) => {
             formData.append('image', file as any);
         });
 
-        this.state.formFields
-            .forEach(formField => formData.append(formField.name, formField.value));
-
-        fetch('http://localhost:3001/mushrooms', {
-            method: 'POST',
-            body: formData,
-        }).then(this.handlePostResponse.bind(this), console.error);
-
+        for (const formField in this.state.formFields) {
+            if (this.state.formFields.hasOwnProperty(formField)) {
+                formData.append(formField, this.state.formFields[formField].value);
+                this.props.createMushroom(formData);
+            }
+        }
     }
 
     handleFileListChange(fileList: UploadFile[]): void {
@@ -85,7 +84,8 @@ export class NewMushroom extends React.Component<Props, State> {
 
     handleFormFieldsChange(changedFields: any): void {
         console.log(changedFields);
-        this.setState(state => ({ formFields: this.state.formFields, ...changedFields }));
+        this.setState(state => ({ formFields: { ...this.state.formFields, ...changedFields }}));
+        console.log(this.state);
     }
 
     render() {
@@ -99,10 +99,27 @@ export class NewMushroom extends React.Component<Props, State> {
                 />
                 <NewMushroomForm
                     {...formFields}
-                    onSubmit={this.handleSubmit}
                     onChange={this.handleFormFieldsChange}
                 />
+                <Button
+                    onClick={this.handleSubmit}
+                    htmlType="submit"
+                >
+                    Senden
+                </Button>
             </div>
         );
     }
 }
+
+const mapStateToProps = state => state;
+
+const mapDispatchToProps = dispatch => {
+    return {
+        createMushroom: data => dispatch(createMushroom.started(data)),
+    };
+};
+export const NewMushroomWithState = connect(
+    mapStateToProps,
+    mapDispatchToProps,
+)(NewMushroom);
